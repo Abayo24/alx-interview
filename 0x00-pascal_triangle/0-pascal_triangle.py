@@ -19,6 +19,7 @@ def pascal_triangle(n):
             previous_row = row
 
 def factorial(num):
+    """Calculate factorial"""
     if num == 0:
         return 1
     return num * factorial(num - 1)
