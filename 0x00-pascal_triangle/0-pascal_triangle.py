@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """pascals Triangle
 """
+
+
 def pascal_triangle(n):
     """Generate Pascal's Triangle up to n rows using a generator."""
     # Check if the input is an integer and non-negative
@@ -12,7 +14,7 @@ def pascal_triangle(n):
         else:
             previous_row = [1]
             yield previous_row
-        
+
             for idx in range(1, n):
                 # Create the current row with 1s
                 row = [1] * (idx + 1)
@@ -27,6 +29,7 @@ def pascal_triangle(n):
     except Exception as e:
         print(f"Unexpected Error: {e}")
         yield []  # Return an empty row in case of an unexpected error
+
 
 def factorial(num):
     """Calculate factorial"""
