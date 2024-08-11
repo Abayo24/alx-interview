@@ -10,7 +10,7 @@ def pascal_triangle(n):
         if not isinstance(n, int):
             raise TypeError("Input must be an integer.")
         if n <= 0:
-            yield []  # Return an empty row if n is less than or equal to 0
+            return  # Return an empty row if n is less than or equal to 0
         else:
             previous_row = [1]
             yield previous_row
