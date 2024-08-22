@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 calculates the fewest number of operations needed to result in
 xactly n H characters in the file.
