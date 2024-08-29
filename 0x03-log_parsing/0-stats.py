@@ -18,19 +18,22 @@ def logParsing(line):
     parts = line.strip().split()
 
     if len(parts) != 6:
-        return None
+        return
 
-    ipAddress, dash, date, getUrl, code, fileSize = parts
+    ipAddress, dash, date, getUrl, statusCode, fileSize = parts
 
     if dash != '-' or not getUrl.startsWith('"GET /projects/260 HTTP/1.1"'):
-        return None
+        return
 
     try:
-        if not code or not isinstance(code, int) or code in statusCodes:
-            return None
-        codeCount[code] += 1
+        statusCode = int(statusCode)
+        fileSize = int(fileSize)
+
+        if statusCode in codeCount:
+            codeCount[statusCode] += 1
 
         totalFileSize += fileSize
+        totalLines += 1
 
     except ValueError:
         pass
@@ -43,16 +46,17 @@ def printMetrics():
 
     print(f'File size: {totalFileSize}')
     for code in sorted(codeCount.keys()):
-        print(f'{code}: {codeCount[code]}')
+        if codeCount[code] > 0:
+            print(f'{code}: {codeCount[code]}')
 
 
 def main():
     """reads from stdin and computes metrics"""
     global totalLines
+
     try:
         for line in sys.stdin:
             logParsing(line)
-            totalLines += 1
         if totalLines % 10 == 0:
             printMetrics()
     except KeyboardInterrupt:
