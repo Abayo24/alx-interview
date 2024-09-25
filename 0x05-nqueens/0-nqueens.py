@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 import sys
 
+
 def print_solution(board):
     """ Prints one solution in the required format """
     solution = []
     for i in range(len(board)):
         solution.append([i, board[i]])
     print(solution)
+
 
 def is_safe(board, row, col):
     """ Check if placing a queen at (row, col) is safe """
@@ -15,22 +17,24 @@ def is_safe(board, row, col):
             return False
     return True
 
+
 def solve_nqueens(board, col, N):
     """ Recursively solve the N Queens problem """
     if col == N:
         print_solution(board)
         return
-    
+
     for row in range(N):
         if is_safe(board, row, col):
             board[col] = row
             solve_nqueens(board, col + 1, N)
-            # backtrack by not resetting the board[col] because the recursion overwrites it
+
 
 def nqueens(N):
     """ Main function to solve N Queens """
     board = [-1] * N
     solve_nqueens(board, 0, N)
+
 
 def main():
     """ Main entry point of the program """
@@ -49,6 +53,7 @@ def main():
         sys.exit(1)
 
     nqueens(N)
+
 
 if __name__ == "__main__":
     main()
